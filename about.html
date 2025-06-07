@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <link rel="stylesheet" href="style.css">
+        
+    </head>
+   
+
+    <body class="about-page">
+
+        <div id="menu">
+        <a href= "index.html"><b>Home page</b> </a>
+         <a href="#"> <b>About</b> </a>
+         
+        </div>
+<p>Discover the world of transportation, with our modes of transport explorer!!</p>
+<p>This takes you on a journey to exploring different modes of transport,learn and broaden your knowledge of ways people and goods move around the world.
+       
+    <h2>Here is a quiz to test your knowledge about different modes of transport</h2>
+
+          <div class="quiz-container">
+            <h2>Quick Transport Quiz!</h2>
+          
+            <div>
+              <p>1. Which mode of transport flies in the sky?</p>
+              <button onclick="checkAnswer(this, 'Plane')">Boat</button>
+              <button onclick="checkAnswer(this, 'Plane')">Truck</button>
+              <button onclick="checkAnswer(this, 'Plane')">Plane</button>
+            </div>
+          
+            <div>
+              <p>2. Which vehicle runs on water?</p>
+              <button onclick="checkAnswer(this, 'Yacht')">Cable Car</button>
+              <button onclick="checkAnswer(this, 'Yacht')">Yacht</button>
+              <button onclick="checkAnswer(this, 'Yacht')">Truck</button>
+            </div>
+          
+            <div>
+              <p>3. Which transport is best for moving goods on land?</p>
+              <button onclick="checkAnswer(this, 'Truck')">Truck</button>
+              <button onclick="checkAnswer(this, 'Truck')">Plane</button>
+              <button onclick="checkAnswer(this, 'Truck')">Boat</button>
+            </div>
+          
+            <div>
+              <p>4. Which transport usually moves people up hills on a cable?</p>
+              <button onclick="checkAnswer(this, 'Cable Car')">Motorcycle</button>
+              <button onclick="checkAnswer(this, 'Cable Car')">Yacht</button>
+              <button onclick="checkAnswer(this, 'Cable Car')">Cable Car</button>
+            </div>
+          
+            <p id="quiz-feedback"></p>
+            <p id="score"></p>
+            <button onclick="clearQuiz()">Clear Quiz</button>
+          </div>
+
+          <!-- script.js -->
+ <script>
+    let score = 0;
+    let totalQuestions = 4;
+    let answeredQuestions = 0;
+  
+    function checkAnswer(button, correctAnswer) {
+      const userAnswer = button.innerText.trim();
+      const feedback = document.getElementById("quiz-feedback");
+  
+      // Avoid double scoring if already answered
+      const questionDiv = button.closest("div");
+      if (questionDiv.dataset.answered === "true") return;
+  
+      if (userAnswer === correctAnswer) {
+        feedback.textContent = `✅ Correct: ${correctAnswer}!`;
+        feedback.style.color = "green";
+        score++;
+      } else {
+        feedback.textContent = `❌ Incorrect. The correct answer is ${correctAnswer}.`;
+        feedback.style.color = "red";
+      }
+  
+      // Mark this question as answered
+      questionDiv.dataset.answered = "true";
+      answeredQuestions++;
+  
+      // Disable all buttons for this question
+      const allButtons = questionDiv.querySelectorAll("button");
+      allButtons.forEach(btn => btn.disabled = true);
+  
+      // If all questions are answered, show score
+      if (answeredQuestions === totalQuestions) {
+        const scoreDisplay = document.getElementById("score");
+        scoreDisplay.textContent = `Your Score: ${score}/${totalQuestions}`;
+      }
+    }
+  
+    function clearQuiz() {
+      score = 0;
+      answeredQuestions = 0;
+      const feedback = document.getElementById("quiz-feedback");
+      const scoreDisplay = document.getElementById("score");
+      feedback.textContent = "";
+      scoreDisplay.textContent = "";
+  
+      // Re-enable all buttons and clear answered flags
+      document.querySelectorAll(".quiz-container div").forEach(questionDiv => {
+        questionDiv.dataset.answered = "false";
+        const buttons = questionDiv.querySelectorAll("button");
+        buttons.forEach(btn => btn.disabled = false);
+      });
+    }
+  </script>
+  <footer>
+    <a href="google.html">Google Web</a>
+    <a href="compkidzs.html">Compukidz Web</a>
+  </footer
+    </body>
+</html>
